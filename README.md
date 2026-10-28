@@ -26,7 +26,7 @@ The production build statically renders the public pages. No database, API crede
 
 - `/` — cinematic introduction, editorial homepage, collection overview
 - `/about` — philosophy and portfolio context
-- `/collections` and `/collections/essentielle`, `/collections/signature`, `/collections/prestige`
+- `/collections` and `/collections/wildflower`, `/collections/nocturne`, `/collections/townhouse`
 - `/customization` — selectable enhancements and validated bespoke enquiry
 - `/e-invitations` — three switchable mobile invitation design previews
 - `/qr-gallery` — simulated scan, sample table card, demonstration gallery
@@ -84,3 +84,7 @@ The smoke script checks 12 routes at desktop/mobile sizes, heading hierarchy, ov
 4. Deploy, verify every route, check the sitemap origin, and test the actual business WhatsApp destination manually before public launch.
 
 No deployment has been performed as part of this implementation. The production QR photo platform would need separately scoped storage, authentication, guest/table access, upload moderation, and retention policies. RSVP previews do not receive responses. This project intentionally does not pretend to provide those backend services.
+
+## Collection identities
+
+Wildflower is a London-inspired glasshouse garden direction (sage, butter, cornflower; meadow florals and natural materials). Nocturne is an evening city direction (oxblood, onyx, silver; velvet and candlelight). The Townhouse is an intimate London house-wedding direction (powder blue, porcelain, blush; antique silver and English roses). These are independent creative collection studies, not price tiers or claims of completed client work. Each has its own original imagery, materials, styling details and enquiry context. Old collection URLs permanently redirect to their replacements.

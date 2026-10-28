@@ -62,9 +62,7 @@ export function Enquire({
         {label}
         <ArrowUpRight size={16} />
       </a>
-      {!site.configured && (
-        <small>Concept preview · WhatsApp number is a placeholder.</small>
-      )}
+      {!site.configured && <small>WhatsApp contact to be confirmed.</small>}
     </div>
   );
 }
@@ -97,7 +95,7 @@ export function PageHero({
         </h1>
         {description && <p>{description}</p>}
       </div>
-      <span className="hero-note">AN ORIGINAL VISION BY NESNOVA</span>
+      <span className="hero-note">THE ART OF A PERSONAL CELEBRATION</span>
     </section>
   );
 }
@@ -107,8 +105,10 @@ export function CollectionGrid() {
       {collections.map((c, i) => (
         <Reveal key={c.slug} className={`collection-item item-${i}`}>
           <Link href={`/collections/${c.slug}`} className="collection-photo">
-            <Photo src={c.image} alt={`${c.name} wedding styling reference`} />
-            <span className="photo-index">0{i + 1} / THE COLLECTION</span>
+            <Photo src={c.image} alt={c.imageAlt} />
+            <span className="photo-index">
+              0{i + 1} / {c.chapter}
+            </span>
             <span className="photo-arrow">
               <ArrowUpRight />
             </span>
@@ -117,7 +117,17 @@ export function CollectionGrid() {
             <h3>
               <Link href={`/collections/${c.slug}`}>{c.name}</Link>
             </h3>
-            <span>{c.subtitle}</span>
+            <span>{c.chapter}</span>
+          </div>
+          <p className="collection-description">{c.shortDescription}</p>
+          <div
+            className="collection-palette"
+            aria-label={`${c.name} palette: ${c.palette}`}
+          >
+            {c.colours.map((colour) => (
+              <span key={colour} style={{ backgroundColor: colour }} />
+            ))}
+            <small>{c.palette}</small>
           </div>
         </Reveal>
       ))}
@@ -145,8 +155,9 @@ export function AboutStory() {
               considered, quietly expressive, and beautifully yours.
             </p>
             <p>
-              Maison Élára is a concept wedding atelier where thoughtful design,
-              meaningful details, and timeless presentation come together.
+              The Maison Élára creative approach brings thoughtful design,
+              meaningful details, and timeless presentation into one personal
+              story.
             </p>
             <TextLink href="/about">DISCOVER OUR STORY</TextLink>
           </div>
@@ -175,13 +186,13 @@ export function HomePage() {
       <section className="hero">
         <Photo
           src={photos.hero}
-          alt="Romantic luxury wedding reception with flowers and candlelit tables"
+          alt="An intimate English townhouse reception with pale-blue linen and seasonal flowers"
           priority
         />
         <div className="hero-shade" />
         <div className="hero-content">
           <Reveal>
-            <p className="eyebrow">BESPOKE WEDDINGS & TIMELESS CELEBRATIONS</p>
+            <p className="eyebrow">ENGLISH ROMANCE. A PERSONAL CELEBRATION.</p>
             <h1>
               Extraordinary
               <br />
@@ -238,17 +249,16 @@ export function HomePage() {
           </div>
           <div>
             <p>
-              From intimate gatherings to extraordinary occasions,
+              From London glasshouses to intimate townhouse tables,
               <br />
-              discover a world of thoughtfully curated possibilities.
+              explore three distinctly different ways to celebrate.
             </p>
             <TextLink href="/collections">EXPLORE ALL COLLECTIONS</TextLink>
           </div>
         </Reveal>
         <CollectionGrid />
         <p className="fine-print">
-          Illustrative concept collections. Every detail is an invitation to
-          imagine.
+          Three creative worlds, each with its own point of view.
         </p>
       </section>
       <section className="bespoke-banner">

@@ -6,15 +6,15 @@ export default function Page() {
     <>
       <PageHero
         eyebrow="THE COLLECTIONS"
-        title="A celebration."
-        italic="Uniquely yours."
-        description="Three expressions of beauty. Endless ways to make them your own."
+        title="Three worlds."
+        italic="One personal story."
+        description="A glasshouse in bloom. A room after dark. A London house filled with light. Find the atmosphere that feels like you."
       />
       <section className="section">
         <CollectionGrid />
         <p className="concept-note">
-          Illustrative concept content. Collections represent creative
-          directions, not confirmed commercial packages or services.
+          Original collection concepts by Maison Élára. Each explores a distinct
+          creative direction.
         </p>
       </section>
     </>

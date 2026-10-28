@@ -11,7 +11,7 @@ import {
   ScanLine,
   X,
 } from "lucide-react";
-import { photos, site, whatsapp } from "@/lib/site";
+import { collections, photos, site, whatsapp } from "@/lib/site";
 const enhancements = [
   "Premium floral arrangements",
   "Personalized wedding stationery",
@@ -109,7 +109,7 @@ export function EnquiryForm({ bespoke = false }: { bespoke?: boolean }) {
               required
               pattern={String.raw`[+0-9\s\(\)\.\-]{7,25}`}
               maxLength={25}
-              placeholder="+60 …"
+              placeholder="+44 …"
               title="Enter a contact number with 7–25 characters"
             />
           </label>
@@ -127,9 +127,9 @@ export function EnquiryForm({ bespoke = false }: { bespoke?: boolean }) {
             PREFERRED COLLECTION
             <select name="Collection" defaultValue="Still exploring">
               <option>Still exploring</option>
-              <option>Essentielle</option>
-              <option>Signature</option>
-              <option>Prestige</option>
+              {collections.map((c) => (
+                <option key={c.slug}>{c.name}</option>
+              ))}
               <option>Digital Invitations</option>
               <option>QR Gallery Experience</option>
             </select>
@@ -184,8 +184,8 @@ export function EnquiryForm({ bespoke = false }: { bespoke?: boolean }) {
         </div>
         {!site.configured && (
           <p className="fine-print">
-            Portfolio demo: the business phone number is a placeholder and must
-            be configured before real enquiries can be sent.
+            WhatsApp contact is not yet configured. Your enquiry can be
+            prepared, but cannot be delivered to a business number yet.
           </p>
         )}
       </form>
@@ -203,34 +203,44 @@ const categories = [
 ];
 const items = [
   {
-    image: photos.venue,
-    category: "Reception",
-    title: "An evening to remember",
-  },
-  {
-    image: photos.flowers,
-    category: "Floral Details",
-    title: "Poetry in bloom",
-  },
-  {
-    image: photos.couple,
-    category: "Intimate Moments",
-    title: "Just the two of you",
-  },
-  {
-    image: photos.hero,
+    image: "/images/wildflower-hero.webp",
     category: "Ceremony",
-    title: "The beginning of forever",
+    title: "Wildflower / A glasshouse romance",
+  },
+  {
+    image: "/images/nocturne-hero.webp",
+    category: "Reception",
+    title: "Nocturne / The evening unfolds",
+  },
+  {
+    image: "/images/townhouse-hero.webp",
+    category: "Bespoke Styling",
+    title: "The Townhouse / Afternoon light",
+  },
+  {
+    image: "/images/wildflower-detail.webp",
+    category: "Floral Details",
+    title: "Wildflower / Meadow at the table",
   },
   {
     image: photos.detail,
     category: "Wedding Stationery",
-    title: "A considered detail",
+    title: "The paper atelier",
   },
   {
-    image: photos.table,
+    image: photos.couple,
+    category: "Intimate Moments",
+    title: "A moment for two",
+  },
+  {
+    image: "/images/nocturne-detail.webp",
+    category: "Reception",
+    title: "Nocturne / By candlelight",
+  },
+  {
+    image: "/images/townhouse-detail.webp",
     category: "Bespoke Styling",
-    title: "A seat at your story",
+    title: "The Townhouse / A place for you",
   },
 ];
 export function Gallery({ compact = false }: { compact?: boolean }) {
@@ -238,7 +248,8 @@ export function Gallery({ compact = false }: { compact?: boolean }) {
   const [active, setActive] = useState<number | null>(null);
   const close = useRef<HTMLButtonElement>(null);
   const opener = useRef<HTMLElement | null>(null);
-  const filtered = items.filter(
+  const galleryItems = compact ? items.slice(0, 6) : items;
+  const filtered = galleryItems.filter(
     (x) => category === "All" || x.category === category,
   );
   useEffect(() => {

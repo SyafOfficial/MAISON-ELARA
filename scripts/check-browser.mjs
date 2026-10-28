@@ -19,9 +19,9 @@ import assert from "node:assert/strict";
     "/",
     "/about",
     "/collections",
-    "/collections/essentielle",
-    "/collections/signature",
-    "/collections/prestige",
+    "/collections/wildflower",
+    "/collections/nocturne",
+    "/collections/townhouse",
     "/customization",
     "/e-invitations",
     "/qr-gallery",
@@ -52,6 +52,45 @@ import assert from "node:assert/strict";
     await page.evaluate(() => window.scrollTo(0, 0));
     console.log("PASS route and image loading " + route);
   }
+  const collectionBackgrounds = [];
+  const collectionImages = [];
+  for (const [slug, name] of [
+    ["wildflower", "Wildflower"],
+    ["nocturne", "Nocturne"],
+    ["townhouse", "The Townhouse"],
+  ]) {
+    await page.goto(`http://localhost:3000/collections/${slug}`);
+    await page.getByRole("heading", { name, exact: false, level: 1 }).waitFor();
+    collectionBackgrounds.push(
+      await page
+        .locator(".collection-world")
+        .evaluate((el) => getComputedStyle(el).backgroundColor),
+    );
+    collectionImages.push(
+      await page.locator(".page-hero img").getAttribute("src"),
+    );
+    const link = await page
+      .getByRole("link", { name: "ENQUIRE ABOUT THIS COLLECTION" })
+      .getAttribute("href");
+    assert.ok(decodeURIComponent(link).includes(name));
+  }
+  assert.equal(new Set(collectionBackgrounds).size, 3);
+  assert.equal(new Set(collectionImages).size, 3);
+  for (const [oldSlug, newSlug] of [
+    ["essentielle", "wildflower"],
+    ["signature", "nocturne"],
+    ["prestige", "townhouse"],
+  ]) {
+    const response = await page.request.get(
+      `http://localhost:3000/collections/${oldSlug}`,
+      { maxRedirects: 0 },
+    );
+    assert.equal(response.status(), 308);
+    assert.equal(response.headers().location, `/collections/${newSlug}`);
+  }
+  console.log(
+    "PASS distinct collection identities, enquiry context, and legacy redirects",
+  );
   await page.goto("http://localhost:3000/contact");
   await page.getByRole("button", { name: "DISCUSS MY VISION" }).click();
   assert.equal(
@@ -160,6 +199,33 @@ import assert from "node:assert/strict";
   });
   await page.waitForTimeout(700);
   await page.screenshot({ path: "/tmp/elara-desktop.png", fullPage: true });
+  await page.goto("http://localhost:3000/collections");
+  for (const img of await page.locator("main img").all()) {
+    await img.scrollIntoViewIfNeeded();
+    await img.evaluate((img) => img.decode());
+  }
+  await page.evaluate(() => window.scrollTo(0, 0));
+  await page.waitForTimeout(500);
+  await page.screenshot({
+    path: "/tmp/elara-collections-desktop.png",
+    fullPage: true,
+  });
+  await page.goto("http://localhost:3000/collections/nocturne");
+  for (const img of await page.locator("main img").all()) {
+    await img.scrollIntoViewIfNeeded();
+    await img.evaluate((img) => img.decode());
+  }
+  await page.evaluate(() => window.scrollTo(0, 0));
+  await page.waitForTimeout(500);
+  await page.screenshot({
+    path: "/tmp/elara-nocturne-desktop.png",
+    fullPage: true,
+  });
+  await page.setViewportSize({ width: 390, height: 844 });
+  await page.screenshot({
+    path: "/tmp/elara-nocturne-mobile.png",
+    fullPage: true,
+  });
   const animated = await browser.newPage({
     viewport: { width: 1440, height: 1000 },
     reducedMotion: "no-preference",

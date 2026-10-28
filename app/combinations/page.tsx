@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { Enquire, PageHero, Photo } from "@/components/editorial";
-import { photos } from "@/lib/site";
+import { photos, collections } from "@/lib/site";
 export const metadata: Metadata = { title: "Combinations & \u00c0 La Carte" };
 export default function Page() {
   return (
@@ -22,36 +22,31 @@ export default function Page() {
             </h2>
           </div>
           <p>
-            Creative combinations for a harmonious celebration.
+            A considered pairing of styling and personal details.
             <br />
-            All services are illustrative concepts.
+            Original creative combinations, imagined around each collection.
           </p>
         </div>
         <div className="combination-grid">
-          {[
-            [
-              "The Intimate Edit",
-              "Essentielle styling, a botanical digital invitation, and personal welcome stationery.",
-              photos.flowers,
-            ],
-            [
-              "The Signature Story",
-              "Signature styling, a tailored invitation concept, and the QR gallery experience.",
-              photos.table,
-            ],
-            [
-              "The Complete Vision",
-              "Prestige creative direction, bespoke stationery, and considered guest details.",
-              photos.venue,
-            ],
-          ].map(([name, desc, image]) => (
-            <article key={name}>
-              <Photo src={image} alt={`${name} inspiration`} />
-              <h3>{name}</h3>
-              <p>{desc}</p>
-              <Enquire subject={name} label="EXPLORE THIS COMBINATION" />
-            </article>
-          ))}
+          {collections
+            .map((collection) => ({
+              name: `${collection.name} / The Complete Edit`,
+              desc:
+                collection.slug === "wildflower"
+                  ? "The glasshouse garden celebration, paired with botanical invitations and personal welcome stationery."
+                  : collection.slug === "nocturne"
+                    ? "The after-dark celebration, paired with a monogrammed digital invitation and an editorial gallery concept."
+                    : "The intimate London house celebration, paired with a hand-drawn invitation and personal place settings.",
+              image: collection.detailImage,
+            }))
+            .map(({ name, desc, image }) => (
+              <article key={name}>
+                <Photo src={image} alt={`${name} inspiration`} />
+                <h3>{name}</h3>
+                <p>{desc}</p>
+                <Enquire subject={name} label="EXPLORE THIS COMBINATION" />
+              </article>
+            ))}
         </div>
         <div className="a-la-carte">
           <p className="eyebrow">02 / À LA CARTE EXPERIENCES</p>

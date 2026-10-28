@@ -49,11 +49,10 @@ export default function Page() {
         <div className="portfolio-note">
           <p className="eyebrow">CONCEPT PROJECT BY NESNOVA</p>
           <p>
-            Maison Élára is an original portfolio exploration by NESNOVA — Web
-            Development & Digital Solutions. It demonstrates bespoke visual
-            branding, custom frontend engineering, responsive design, and
-            thoughtful digital experiences. It is not a previously commissioned
-            client project or an operating wedding business.
+            An original wedding atelier concept by NESNOVA, inspired by London’s
+            gardens, city evenings, and intimate Georgian houses. Independent
+            creative direction, visual identity, and digital experience,
+            imagined as one complete world.
           </p>
           <TextLink href="/contact">EXPLORE THE POSSIBILITIES</TextLink>
         </div>

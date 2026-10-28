@@ -242,9 +242,8 @@ export function Footer() {
         <span>IMAGINED WITH INTENTION. CRAFTED WITH CARE.</span>
       </div>
       <p className="fine-print">
-        Concept Project by NESNOVA — Web Development & Digital Solutions.
-        Illustrative services and reference imagery; no real bookings or client
-        projects are represented.
+        Creative direction & development by NESNOVA — Web Development & Digital
+        Solutions.
       </p>
     </footer>
   );

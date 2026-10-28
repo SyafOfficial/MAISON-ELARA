@@ -5,20 +5,20 @@ import "@fontsource/manrope/400.css";
 import "@fontsource/manrope/500.css";
 import "./globals.css";
 import { Navigation, Intro, Footer, MotionProvider } from "@/components/chrome";
-import { site } from "@/lib/site";
+import { site, photos } from "@/lib/site";
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),
   title: {
-    default: "MAISON ÉLARA — Timeless Wedding Experiences",
+    default: "MAISON ÉLARA — London-Inspired Wedding Atelier",
     template: "%s | MAISON ÉLARA",
   },
   description:
-    "An editorial vision of bespoke wedding celebrations. An original luxury wedding portfolio concept by NESNOVA.",
+    "London-inspired wedding collections, from botanical glasshouses to intimate townhouses and candlelit city receptions. An original portfolio concept by NESNOVA.",
   openGraph: {
     title: "MAISON ÉLARA",
     description: "Where Every Moment Becomes Timeless.",
     type: "website",
-    images: ["/images/hero.webp"],
+    images: [photos.hero],
   },
 };
 export default function Layout({ children }: { children: React.ReactNode }) {
