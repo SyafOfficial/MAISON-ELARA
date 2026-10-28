@@ -39,7 +39,7 @@ The production build statically renders the public pages. No database, API crede
 Copy `.env.example` to `.env.local` and replace:
 
 - `NEXT_PUBLIC_WHATSAPP_NUMBER`: your actual WhatsApp business number in international format, digits only, without `+`, spaces, or a leading domestic zero. The fictional fallback `60000000000` is deliberately not a real business contact.
-- `NEXT_PUBLIC_SITE_URL`: the actual deployed HTTPS origin, used for Open Graph, robots, and sitemap URLs. The `.example` fallback is a placeholder.
+- `NEXT_PUBLIC_SITE_URL`: the actual deployed HTTPS origin, used for Open Graph, robots, and sitemap URLs. The default is `https://maison-elara-phi.vercel.app`; override it when moving to a custom domain.
 
 Both variables are public and compiled at build time. Rebuild after changes. Contact labels live in `lib/site.ts`: replace the email and Instagram placeholder text only when genuine details are available. Add corresponding `mailto:` / social links when those destinations are confirmed. Replace concept copy with verified service information only if launching a real business.
 

@@ -3,6 +3,9 @@ const configuredPhone =
 
 export const site = {
   name: "MAISON ÉLARA",
+  url: (
+    process.env.NEXT_PUBLIC_SITE_URL || "https://maison-elara-phi.vercel.app"
+  ).replace(/\/$/, ""),
   phone: configuredPhone || "60000000000",
   configured:
     /^[1-9]\d{6,14}$/.test(configuredPhone) &&

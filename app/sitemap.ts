@@ -1,8 +1,7 @@
 import type { MetadataRoute } from "next";
-import { navigation, collections } from "@/lib/site";
+import { navigation, collections, site } from "@/lib/site";
 export default function sitemap(): MetadataRoute.Sitemap {
-  const base =
-    process.env.NEXT_PUBLIC_SITE_URL || "https://maison-elara.example";
+  const base = site.url;
   return [
     ...navigation.map(([, p]) => p),
     ...collections.map((c) => `/collections/${c.slug}`),

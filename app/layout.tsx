@@ -5,10 +5,9 @@ import "@fontsource/manrope/400.css";
 import "@fontsource/manrope/500.css";
 import "./globals.css";
 import { Navigation, Intro, Footer, MotionProvider } from "@/components/chrome";
+import { site } from "@/lib/site";
 export const metadata: Metadata = {
-  metadataBase: new URL(
-    process.env.NEXT_PUBLIC_SITE_URL || "https://maison-elara.example",
-  ),
+  metadataBase: new URL(site.url),
   title: {
     default: "MAISON ÉLARA — Timeless Wedding Experiences",
     template: "%s | MAISON ÉLARA",
